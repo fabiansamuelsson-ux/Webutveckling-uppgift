@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+}
+
+.navbar{
+    background-color: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    width: 100%;
+    border-width:0.2vh ;
+    border-radius: 0;
+    border-color: #000000;
+    opacity: 0.9;
+}
+.navbar a:hover{
+color: #dacd84;
+text-decoration: underline;
+}
+
+.navbar li{
+    flex: 1;
+}
+
+.navbar ul{
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.navbar a{
+    display: block;
+    color: bisque;
+    text-align: center;
+    padding: 3%;
+    text-decoration: none;
+}
+
+h1{
+    margin-top: 5%;
+    background-color: rgb(247, 247, 247);
+    border-radius: 5vh;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border: 0.4vh solid rgb(212, 183, 39);
+    width: 100%;
+}
