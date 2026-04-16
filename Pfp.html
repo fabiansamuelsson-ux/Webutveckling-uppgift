@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="Slutp.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+                <li class="contact-link">
+                    <a href="Pfp.html"><img src="image.png" class="profile-img" alt="Profile"></a>
+                    <div id="username-display" class="username-display"></div>
+                </li>
+                <li><a href="Slutp.html">Menu</a></li>
+                <li><a href="Slutp2.html">Tyranids</a></li>
+                <li><a href="Slutp3.html">Automatons</a></li>
+                <li><a href="Slutp4.html">Illuminate</a></li>
+                <li><a href="Slutp5.html">Stratagems</a></li>
+                <li><a href="Slutp6.html">Armory</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="user-form">
+            <form id="username-form">
+                <label for="username">Enter username:</label>
+                <input type="text" id="username" name="username" placeholder="Your username" maxlength="10">
+                <div class="upload-field">
+                    <label for="avatar-input">Upload picture:</label>
+                    <input type="file" id="avatar-input" accept="image/*">
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const usernameForm = document.getElementById('username-form');
+        const usernameInput = document.getElementById('username');
+        const usernameDisplay = document.getElementById('username-display');
+        const avatarInput = document.getElementById('avatar-input');
+        const profileImg = document.querySelector('.profile-img');
+
+        function getStoredData() {
+            try {
+                localStorage.setItem('__profile_test', '1');
+                localStorage.removeItem('__profile_test');
+                return {
+                    getItem: key => localStorage.getItem(key),
+                    setItem: (key, value) => localStorage.setItem(key, value)
+                };
+            } catch (error) {
+                return {
+                    getItem: key => {
+                        try {
+                            const data = JSON.parse(window.name || '{}');
+                            return data[key] || null;
+                        } catch (e) {
+                            return null;
+                        }
+                    },
+                    setItem: (key, value) => {
+                        try {
+                            const data = JSON.parse(window.name || '{}');
+                            data[key] = value;
+                            window.name = JSON.stringify(data);
+                        } catch (e) {
+                            window.name = JSON.stringify({ [key]: value });
+                        }
+                    }
+                };
+            }
+        }
+
+        const storage = getStoredData();
+
+        usernameForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const value = usernameInput.value.trim().slice(0, 10);
+            usernameDisplay.textContent = value ? value : '';
+            storage.setItem('profileUsername', value);
+
+            const file = avatarInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    profileImg.src = reader.result;
+                    storage.setItem('profileImage', reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+
+            usernameInput.value = '';
+            avatarInput.value = null;
+        });
+    </script>
+    <script src="profile-store.js"></script>
+</body>
+</html>
