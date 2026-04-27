@@ -53,14 +53,25 @@ contactModal.addEventListener('click', (event) => {
   }
 });
 
+function isValidGmailAddress(value) {
+  if (!value || typeof value !== 'string') return false;
+  const trimmed = value.trim().toLowerCase();
+  return /^[a-z0-9._%+-]+@gmail\.com$/.test(trimmed);
+}
+
 // Handle form submission
 contactForm.addEventListener('submit', (event) => {
   event.preventDefault();
   
   // Get form values
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (!isValidGmailAddress(email)) {
+    alert('Please enter a valid Gmail address ending with @gmail.com.');
+    return;
+  }
   
   // Simple submission handling (you can add backend integration here)
   console.log('Form submitted:', { name, email, message });

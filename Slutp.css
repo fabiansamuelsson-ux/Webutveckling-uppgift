@@ -7,8 +7,15 @@
 
 body {
     margin: 0;
+    padding-top: 5.5rem;
+    padding-bottom: 6rem;
     overflow-x: hidden;
     font-family: Arial, sans-serif;
+}
+
+main {
+    position: relative;
+    z-index: 1;
 }
 
 .navbar{
@@ -18,6 +25,7 @@ body {
     right: 0;
     position: fixed;
     width: 100%;
+    z-index: 1000;
     border-width:0.2vh ;
     border-radius: 0;
     border-color: #000000;
@@ -33,13 +41,13 @@ text-decoration: underline;
 }
 
 .mainback {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: -1;
-    margin-top: -7,5%;
-
 }
 
 .navbar li.contact-link{
@@ -95,7 +103,6 @@ text-decoration: underline;
 }
 
 h1{
-    margin-top: 5%;
     background-color: rgb(247, 247, 247);
     border-radius: 5vh;
     color: rgb(0, 0, 0);
@@ -126,6 +133,7 @@ h3{
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     padding: 15px 20px;
@@ -250,6 +258,101 @@ h3{
     max-width: 300px;
 }
 
+/* Pfp page styles */
+.pfp-page {
+    background-color: #000000;
+    color: bisque;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.pfp-page .main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh 10vh 20vh;
+    position: relative;
+    z-index: 1;
+}
+
+.pfp-page .profile-card {
+    background: rgba(19, 19, 19, 0.95);
+    border: 0.4vh solid #d4b727;
+    border-radius: 2rem;
+    box-shadow: 0 0 40px rgba(212, 183, 39, 0.25);
+    padding: 3vh;
+    width: min(440px, 100%);
+}
+
+.pfp-page .profile-card h1 {
+    margin: 0 0 24px;
+    color: #dacd84;
+    text-align: center;
+    font-family: mjölk, Arial, sans-serif;
+}
+
+.pfp-page #username-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pfp-page #username-form label,
+.pfp-page #username-form button,
+.pfp-page .logout-btn {
+    color: bisque;
+}
+
+.pfp-page #username-form input[type="text"],
+.pfp-page #username-form input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #d4b727;
+    background: rgba(255, 255, 255, 0.08);
+    color: bisque;
+}
+
+.pfp-page #username-form input::placeholder {
+    color: #d4c86d;
+}
+
+.pfp-page #username-form button,
+.pfp-page .logout-btn {
+    border: 0.4vh solid #d4b727;
+    background-color: black;
+    color: bisque;
+    border-radius: 10px;
+    padding: 12px 18px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pfp-page #username-form button:hover,
+.pfp-page .logout-btn:hover {
+    background-color: #dacd84;
+    color: black;
+    transform: translateY(-1px);
+}
+
+.pfp-page .button-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pfp-page .button-row button {
+    flex: 1;
+}
+
+.pfp-page .upload-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #username-form button {
     padding: 8px 12px;
     border-radius: 5px;
@@ -257,6 +360,106 @@ h3{
     background-color: black;
     color: bisque;
     cursor: pointer;
+}
+
+/* Responsive text and layout flow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+main, section, article, div, p, h1, h2, h3, a, button {
+    max-width: 100%;
+}
+
+.navbar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.navbar li {
+    flex: 0 1 auto;
+}
+
+.navbar a {
+    display: block;
+    color: bisque;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+h1 {
+    margin: 4.5% auto 1rem;
+    padding: 1rem;
+    width: min(95%, 1100px);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+}
+
+h2 {
+    margin: 2rem auto 0;
+    padding: 1rem;
+    width: min(95%, 760px);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    height: auto;
+}
+
+.update p {
+    margin: 1rem auto 2rem;
+    padding: 0.75rem 1rem;
+    width: min(95%, 760px);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.6;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 2rem;
+    color: #fff;
+    border: 0.2rem solid rgb(212, 183, 39);
+}
+
+.footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.footer-btn {
+    flex: 1 1 240px;
+    min-width: 150px;
+}
+
+.contact-form-btn,
+.footer-btn,
+input,
+textarea {
+    max-width: 100%;
+}
+
+@media (max-width: 640px) {
+    .navbar {
+        padding: 0.5rem 0;
+    }
+    .navbar a {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.95rem;
+    }
+    h1 {
+        margin-top: 6rem;
+    }
+    .footer {
+        padding: 1rem;
+    }
 }
 
 .contact-modal {
@@ -320,6 +523,11 @@ h3{
     margin-bottom: 20px;
 }
 
+.update p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
 .form-group {
     margin-bottom: 15px;
     display: flex;
@@ -338,6 +546,7 @@ h3{
     border-radius: 5px;
     font-family: Arial, sans-serif;
     font-size: 14px;
+    min-height: 120px;
 }
 
 .form-group textarea:focus {
@@ -383,10 +592,66 @@ h3{
     z-index: 500;
 }
 
+
+
 .contact-form-btn:hover {
     background-color: bisque;
     transform: scale(1.05);
 }
+
+.table-section {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 3rem auto 4rem;
+    padding: 1.5rem;
+    color: bisque;
+}
+
+.table-section h1 {
+    margin-bottom: 1rem;
+    color: #dacd84;
+    font-family: mjölk, Arial, sans-serif;
+    text-align: center;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #dacd84;
+}
+
+.info-table th,
+.info-table td {
+    padding: 14px 16px;
+    border: 1px solid rgba(212, 183, 39, 0.5);
+    text-align: left;
+}
+
+.info-table thead th {
+    background: #dacd84;
+    color: black;
+}
+
+.info-table tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.info-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.info-table tfoot tr {
+    background: rgba(218, 205, 132, 0.95);
+    color: black;
+    font-weight: bold;
+}
+
+.info-table tfoot td {
+    border-top: 2px solid #d4b727;
+}
+
 
 .updates-section {
     padding: 40px 20px;

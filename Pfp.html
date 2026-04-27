@@ -5,99 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <style>
-        body {
-            background-color: #000000;
-            color: bisque;
-        }
-
-        .main-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 20px 40px;
-        }
-
-        .profile-card {
-            background: rgba(19, 19, 19, 0.95);
-            border: 0.4vh solid #d4b727;
-            border-radius: 2rem;
-            box-shadow: 0 0 40px rgba(212, 183, 39, 0.25);
-            padding: 32px;
-            width: min(440px, 100%);
-        }
-
-        .profile-card h1 {
-            margin: 0 0 24px;
-            color: #dacd84;
-            text-align: center;
-            font-family: mjölk, Arial, sans-serif;
-        }
-
-        #username-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        #username-form label,
-        #username-form button,
-        .logout-btn {
-            color: bisque;
-        }
-
-        #username-form input[type="text"],
-        #username-form input[type="file"] {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid #d4b727;
-            background: rgba(255, 255, 255, 0.08);
-            color: bisque;
-        }
-
-        #username-form input::placeholder {
-            color: #d4c86d;
-        }
-
-        #username-form button,
-        .logout-btn {
-            border: 0.4vh solid #d4b727;
-            background-color: black;
-            color: bisque;
-            border-radius: 10px;
-            padding: 12px 18px;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-
-        #username-form button:hover,
-        .logout-btn:hover {
-            background-color: #dacd84;
-            color: black;
-            transform: translateY(-1px);
-        }
-
-        .button-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .button-row button {
-            flex: 1;
-        }
-
-        .upload-field {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-    </style>
 </head>
-<body>
+<body class="pfp-page">
     <nav class="navbar">
         <ul>
                 <li class="contact-link">
@@ -112,6 +21,8 @@
                 <li><a href="Slutp6.html">Armory</a></li>
         </ul>
     </nav>
+
+    <img src="4260221-hell.jpg" alt="peace" class="mainback">
 
     <main class="main-container">
         <section class="profile-card">
@@ -220,5 +131,9 @@
         });
     </script>
     <script src="profile-store.js"></script>
+    <footer class="footer">
+        <button class="footer-btn left-btn" data-message="We are a small solo-run company that focuses on informing our fellow Helldivers about the casualties in the war."><a href="#">About us</a></button>
+        <button class="footer-btn right-btn" data-message="phonenumber: 0706388652, Gmail: Helldivers.wiki.fandom@gmail.com"><a href="Pfp.html">Contact Information</a></button>
+    </footer>
 </body>
 </html>
