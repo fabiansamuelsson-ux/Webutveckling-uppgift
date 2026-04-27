@@ -4,7 +4,98 @@
     <link rel="stylesheet" href="Slutp.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: bisque;
+        }
+
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 40px;
+        }
+
+        .profile-card {
+            background: rgba(19, 19, 19, 0.95);
+            border: 0.4vh solid #d4b727;
+            border-radius: 2rem;
+            box-shadow: 0 0 40px rgba(212, 183, 39, 0.25);
+            padding: 32px;
+            width: min(440px, 100%);
+        }
+
+        .profile-card h1 {
+            margin: 0 0 24px;
+            color: #dacd84;
+            text-align: center;
+            font-family: mjölk, Arial, sans-serif;
+        }
+
+        #username-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        #username-form label,
+        #username-form button,
+        .logout-btn {
+            color: bisque;
+        }
+
+        #username-form input[type="text"],
+        #username-form input[type="file"] {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d4b727;
+            background: rgba(255, 255, 255, 0.08);
+            color: bisque;
+        }
+
+        #username-form input::placeholder {
+            color: #d4c86d;
+        }
+
+        #username-form button,
+        .logout-btn {
+            border: 0.4vh solid #d4b727;
+            background-color: black;
+            color: bisque;
+            border-radius: 10px;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        #username-form button:hover,
+        .logout-btn:hover {
+            background-color: #dacd84;
+            color: black;
+            transform: translateY(-1px);
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button-row button {
+            flex: 1;
+        }
+
+        .upload-field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -22,8 +113,9 @@
         </ul>
     </nav>
 
-    <main>
-        <section class="user-form">
+    <main class="main-container">
+        <section class="profile-card">
+            <h1>Profile settings</h1>
             <form id="username-form">
                 <label for="username">Enter username:</label>
                 <input type="text" id="username" name="username" placeholder="Your username" maxlength="10">
@@ -31,7 +123,10 @@
                     <label for="avatar-input">Upload picture:</label>
                     <input type="file" id="avatar-input" accept="image/*">
                 </div>
-                <button type="submit">Save</button>
+                <div class="button-row">
+                    <button type="submit">Save</button>
+                    <button id="logout-button" type="button" class="logout-btn">Log out</button>
+                </div>
             </form>
         </section>
     </main>
@@ -42,6 +137,7 @@
         const usernameDisplay = document.getElementById('username-display');
         const avatarInput = document.getElementById('avatar-input');
         const profileImg = document.querySelector('.profile-img');
+        const logoutButton = document.getElementById('logout-button');
 
         function getStoredData() {
             try {
@@ -74,6 +170,20 @@
             }
         }
 
+        function removeStoredData(key) {
+            try {
+                localStorage.removeItem(key);
+            } catch (error) {
+                try {
+                    const data = JSON.parse(window.name || '{}');
+                    delete data[key];
+                    window.name = JSON.stringify(data);
+                } catch (e) {
+                    window.name = '{}';
+                }
+            }
+        }
+
         const storage = getStoredData();
 
         usernameForm.addEventListener('submit', event => {
@@ -92,6 +202,19 @@
                 reader.readAsDataURL(file);
             }
 
+            usernameInput.value = '';
+            avatarInput.value = null;
+        });
+
+        logoutButton.addEventListener('click', () => {
+            removeStoredData('profileUsername');
+            removeStoredData('profileImage');
+            if (storage.setItem) {
+                storage.setItem('profileUsername', '');
+                storage.setItem('profileImage', '');
+            }
+            profileImg.src = 'image.png';
+            usernameDisplay.textContent = '';
             usernameInput.value = '';
             avatarInput.value = null;
         });
