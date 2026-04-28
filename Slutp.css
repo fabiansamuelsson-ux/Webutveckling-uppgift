@@ -50,6 +50,10 @@ text-decoration: underline;
     z-index: -1;
 }
 
+section {
+    min-height: calc(100vh - 11.5rem);
+}
+
 .navbar li.contact-link{
     flex: 0 0 auto;
     display: flex;
