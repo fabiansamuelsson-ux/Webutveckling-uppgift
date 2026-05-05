@@ -11,11 +11,69 @@ body {
     padding-bottom: 6rem;
     overflow-x: hidden;
     font-family: Arial, sans-serif;
+    color: #dacd84;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 main {
     position: relative;
     z-index: 1;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.enemy-table-section {
+    padding: 2rem 1rem 7rem;
+}
+
+.enemy-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.enemy-thumb {
+    width: 110px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.table-section {
+    padding: 2rem 1rem 7rem;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.info-table th,
+.info-table td {
+    padding: 0.85rem 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.info-table thead th {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: bisque;
+}
+
+.info-table tfoot td {
+    padding: 1rem;
+    font-size: 0.95rem;
 }
 
 .navbar{
@@ -48,6 +106,13 @@ text-decoration: underline;
     height: 100%;
     object-fit: cover;
     z-index: -1;
+}
+
+.background-section {
+    min-height: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
 }
 
 section {
@@ -380,6 +445,82 @@ body {
     word-wrap: break-word;
 }
 
+@media (max-width: 768px) {
+    body {
+        padding-top: 6.5rem;
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .navbar li {
+        flex: 1 1 140px;
+        min-width: 120px;
+    }
+
+    .navbar a {
+        padding: 1rem 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .profile-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .username-display {
+        font-size: 0.72rem;
+    }
+
+    .table-section {
+        padding: 1.5rem 0.75rem 9rem;
+    }
+
+    .info-table {
+        min-width: 100%;
+    }
+
+    .info-table th,
+    .info-table td {
+        padding: 0.75rem 0.65rem;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding: 12px 10px;
+    }
+
+    .footer-btn {
+        width: 100%;
+    }
+
+    .pfp-page .main-container {
+        min-height: auto;
+        align-items: flex-start;
+        padding: 1.5rem 1rem 2rem;
+    }
+
+    .pfp-page .profile-card {
+        width: min(100%, 92vw);
+        padding: 1.8rem;
+        border-radius: 1.5rem;
+        margin: 0 auto;
+    }
+
+    .pfp-page .button-row {
+        gap: 0.75rem;
+    }
+
+    .pfp-page .button-row button {
+        flex: 1 1 140px;
+    }
+}
+
 main, section, article, div, p, h1, h2, h3, a, button {
     max-width: 100%;
 }
@@ -420,8 +561,22 @@ h2 {
     height: auto;
 }
 
+.update h2 {
+    margin: 1.5rem auto 0.75rem;
+    width: min(95%, 760px);
+    padding: 0.75rem 1rem;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: bisque;
+    border-radius: 1.5rem;
+    border: 0.2rem solid rgb(212, 183, 39);
+    text-align: center;
+    font-family: mjölk, Arial, sans-serif;
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    height: auto;
+}
+
 .update p {
-    margin: 1rem auto 2rem;
+    margin: 0.75rem auto 2rem;
     padding: 0.75rem 1rem;
     width: min(95%, 760px);
     font-size: clamp(1rem, 2vw, 1.2rem);
@@ -463,6 +618,65 @@ textarea {
     }
     .footer {
         padding: 1rem;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+    .footer-btn {
+        flex: 0 1 auto;
+        min-width: 0;
+        max-width: 170px;
+        padding: 7px 10px;
+        font-size: 0.88rem;
+        width: auto;
+    }
+    .footer-btn a {
+        padding: 0;
+        display: inline-block;
+    }
+
+    .contact-bubble {
+        width: min(92%, 420px);
+        max-width: 420px;
+        padding: 18px 16px;
+    }
+
+    .contact-bubble h2 {
+        margin-bottom: 16px;
+    }
+
+    .close-btn {
+        right: 12px;
+        top: 12px;
+        font-size: 24px;
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+    }
+
+    .submit-btn {
+        padding: 10px 16px;
+    }
+
+    .pfp-page .main-container {
+        min-height: auto;
+        align-items: flex-start;
+        padding: 2rem 1rem 2rem;
+    }
+
+    .pfp-page .profile-card {
+        width: min(100%, 95vw);
+        padding: 2rem;
+        border-radius: 1.5rem;
+        margin: 0 auto;
+    }
+
+    .pfp-page .button-row {
+        gap: 0.75rem;
+    }
+
+    .pfp-page .button-row button {
+        flex: 1 1 140px;
     }
 }
 
@@ -607,7 +821,7 @@ textarea {
     position: relative;
     z-index: 1;
     max-width: 900px;
-    margin: 3rem auto 4rem;
+    margin: 1.5rem auto 4rem;
     padding: 1.5rem;
     color: bisque;
 }
