@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="Slutp.css">
+    <link rel="stylesheet" href="Css/Slutp.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
+
 <body>
     <nav class="navbar">
         <ul>
-                <li class="contact-link"><a href="Pfp.html"><img src="image.png" class="profile-img" alt="Profile"></a><div id="username-display" class="username-display"></div></li>
+                <li class="contact-link"><a href="Pfp.html"><img src="images/image.png" class="profile-img" alt="Profile"></a><div id="username-display" class="username-display"></div></li>
                 <li><a href="Slutp.html">Menu</a></li>
                 <li><a href="Slutp2.html">Enemies</a></li>
                 <li><a href="Slutp5.html">Stratagems</a></li>
@@ -18,7 +20,7 @@
 </nav>
     <main>
         <section>
-            <img src="05182-ezgif.com-video-to-gif-converter.gif" alt="enemies" class="mainback bugs">
+            <img src="images/05182-ezgif.com-video-to-gif-converter.gif" alt="enemies" class="mainback bugs">
         <section class="enemy-table-section">
             <h1>Enemies</h1>
             <div class="table-wrapper">
@@ -33,7 +35,7 @@
                     <tbody>
                         <tr>
                             <td class="enemy-cell">
-                                <img src="3171070270_preview_Hunter_II.png" alt="Hunter" class="enemy-thumb">
+                                <img src="images/3171070270_preview_Hunter_II.png" alt="Hunter" class="enemy-thumb">
                                 <div>Termenids</div>
                             </td>
                             <td>Piercing and poison</td>
@@ -41,7 +43,7 @@
                         </tr>
                         <tr>
                             <td class="enemy-cell">
-                                <img src="3171070270_preview_Trooper2CRaider2CMarauder_II [MConverter.eu].png" alt="Trooper Raider Marauder" class="enemy-thumb">
+                                <img src="images/3171070270_preview_Trooper2CRaider2CMarauder_II [MConverter.eu].png" alt="Trooper Raider Marauder" class="enemy-thumb">
                                 <div>Autometon</div>
                             </td>
                             <td>Explosive, Laser, Slashing</td>
@@ -49,7 +51,7 @@
                         </tr>
                         <tr>
                             <td class="enemy-cell">
-                                <img src="Elevated-Overseer.png" alt="Elevated Overseer" class="enemy-thumb">
+                                <img src="images/Elevated-Overseer.png" alt="Elevated Overseer" class="enemy-thumb">
                                 <div>Illuminate</div>
                             </td>
                             <td>Energy and Blunt</td>
@@ -61,6 +63,33 @@
         </section>
         </section>
     </main>
+
+    
+<button id="contact-form-btn" class="contact-form-btn">Contact Us</button>
+
+    <div id="contact-modal" class="contact-modal">
+        <div class="contact-bubble">
+            <span class="close-btn">&times;</span>
+            <h3>Get in Touch</h3>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send</button>
+            </form>
+        </div>
+    </div>
+
+
     <script src="profile-store.js"></script>
         <footer class="footer">
         <button class="footer-btn left-btn" data-message="We are a small solo-run company that focuses on informing our fellow Helldivers about the casualties in the war."><a href="#">About us</a></button>

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Milker&display=swap');
 
 @font-face {
-  font-family: mjölk; /* set name */
-  src: url(milker/Milker.otf); /* url of the font */
+font-family: Mjölk;
+src: url("../milker/Milker.otf");
 }
 
 body {
