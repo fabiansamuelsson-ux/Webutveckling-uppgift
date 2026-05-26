@@ -30,23 +30,23 @@ footerButtons.forEach(button => {
   });
 });
 
-// Contact Form Modal Functionality
+// Funktionalitet för kontaktformulärets modal
 const contactFormBtn = document.getElementById('contact-form-btn');
 const contactModal = document.getElementById('contact-modal');
 const closeBtn = document.querySelector('.close-btn');
 const contactForm = document.getElementById('contact-form');
 
-// Open modal when button is clicked
+// Öppna modal när knappen klickas
 contactFormBtn.addEventListener('click', () => {
   contactModal.classList.add('show');
 });
 
-// Close modal when close button is clicked
+// Stäng modal när stängningsknappen klickas
 closeBtn.addEventListener('click', () => {
   contactModal.classList.remove('show');
 });
 
-// Close modal when clicking outside the bubble
+// Stäng modal när användaren klickar utanför rutan
 contactModal.addEventListener('click', (event) => {
   if (event.target === contactModal) {
     contactModal.classList.remove('show');
@@ -59,11 +59,11 @@ function isValidGmailAddress(value) {
   return /^[a-z0-9._%+-]+@gmail\.com$/.test(trimmed);
 }
 
-// Handle form submission
+// Hantera formulärinlämning
 contactForm.addEventListener('submit', (event) => {
   event.preventDefault();
   
-  // Get form values
+  // Hämta formulärvärden
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
   const message = document.getElementById('message').value.trim();
@@ -73,15 +73,15 @@ contactForm.addEventListener('submit', (event) => {
     return;
   }
   
-  // Simple submission handling (you can add backend integration here)
+  // Enkel hantering av formulärinlämning (du kan lägga till backend-integration här)
   console.log('Form submitted:', { name, email, message });
   
-  // Reset form
+  // Återställ formuläret
   contactForm.reset();
   
-  // Close modal
+  // Stäng modal
   contactModal.classList.remove('show');
   
-  // Optional: Show success message
+  // Valfritt: Visa ett framgångsmeddelande
   alert('Thank you for contacting us! We will get back to you soon.');
 });
