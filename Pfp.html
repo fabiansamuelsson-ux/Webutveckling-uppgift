@@ -41,198 +41,122 @@
     </main>
 
     <script>
+        /* Skript för profilinställningar och lagring */
+
         // Hämtar formuläret för användarnamn
-const usernameForm = document.getElementById('username-form');
+        const usernameForm = document.getElementById('username-form');
 
-// Hämtar inputfältet för användarnamn
-const usernameInput = document.getElementById('username');
+        // Hämtar inputfältet för användarnamn
+        const usernameInput = document.getElementById('username');
 
-// Hämtar elementet där användarnamnet visas
-const usernameDisplay = document.getElementById('username-display');
+        // Hämtar elementet där användarnamnet visas i navigeringen
+        const usernameDisplay = document.getElementById('username-display');
 
-// Hämtar inputfältet för profilbild
-const avatarInput = document.getElementById('avatar-input');
+        // Hämtar inputfältet för profilbild
+        const avatarInput = document.getElementById('avatar-input');
 
-// Hämtar profilbilden i navigationen
-const profileImg = document.querySelector('.profile-img');
+        // Hämtar profilbildselementet i navigationen
+        const profileImg = document.querySelector('.profile-img');
 
-// Hämtar logout-knappen
-const logoutButton = document.getElementById('logout-button');
+        // Hämtar logout-knappen
+        const logoutButton = document.getElementById('logout-button');
 
+        
+        // Funktion som hanterar åtkomst till lagring
+        function getStoredData() {
+            try {
+                // Testar att localStorage fungerar
+                localStorage.setItem('__profile_test', '1');
+                localStorage.removeItem('__profile_test');
 
-// Funktion som hanterar lagring av data
-function getStoredData() {
+                // Använder localStorage om den är tillgänglig
+                return {
+                    getItem: key => localStorage.getItem(key),
+                    setItem: (key, value) => localStorage.setItem(key, value)
+                };
+            } catch (error) {
+                // Reservlösning: använder window.name när localStorage inte finns
+                return {
+                    getItem: key => {
+                        try {
+                            const data = JSON.parse(window.name || '{}');
+                            return data[key] || null;
+                        } catch (e) {
+                            return null;
+                        }
+                    },
+                    setItem: (key, value) => {
+                        try {
+                            const data = JSON.parse(window.name || '{}');
+                            data[key] = value;
+                            window.name = JSON.stringify(data);
+                        } catch (e) {
+                            window.name = JSON.stringify({ [key]: value });
+                        }
+                    }
+                };
+            }
+        }
 
-    try {
-
-        // Testar om localStorage fungerar
-        localStorage.setItem('__profile_test', '1');
-        localStorage.removeItem('__profile_test');
-
-        // Returnerar funktioner för localStorage
-        return {
-
-            // Hämtar sparad data
-            getItem: key => localStorage.getItem(key),
-
-            // Sparar data
-            setItem: (key, value) => localStorage.setItem(key, value)
-        };
-
-    } catch (error) {
-
-        // Om localStorage inte fungerar används window.name
-        return {
-
-            // Hämtar data från window.name
-            getItem: key => {
-
+        
+        // Funktion som tar bort sparad data
+        function removeStoredData(key) {
+            try {
+                localStorage.removeItem(key);
+            } catch (error) {
                 try {
-
-                    // Läser in sparad data
                     const data = JSON.parse(window.name || '{}');
-
-                    // Returnerar värdet eller null
-                    return data[key] || null;
-
-                } catch (e) {
-
-                    // Returnerar null om något går fel
-                    return null;
-                }
-            },
-
-            // Sparar data i window.name
-            setItem: (key, value) => {
-
-                try {
-
-                    // Hämtar tidigare sparad data
-                    const data = JSON.parse(window.name || '{}');
-
-                    // Sparar nytt värde
-                    data[key] = value;
-
-                    // Gör om objektet till text och sparar
+                    delete data[key];
                     window.name = JSON.stringify(data);
-
                 } catch (e) {
-
-                    // Skapar nytt objekt om något går fel
-                    window.name = JSON.stringify({ [key]: value });
+                    window.name = '{}';
                 }
             }
-        };
-    }
-}
-
-
-// Funktion som tar bort sparad data
-function removeStoredData(key) {
-
-    try {
-
-        // Tar bort data från localStorage
-        localStorage.removeItem(key);
-
-    } catch (error) {
-
-        try {
-
-            // Hämtar sparad data
-            const data = JSON.parse(window.name || '{}');
-
-            // Tar bort vald nyckel
-            delete data[key];
-
-            // Sparar tillbaka datan
-            window.name = JSON.stringify(data);
-
-        } catch (e) {
-
-            // Återställer datan om något går fel
-            window.name = '{}';
         }
-    }
-}
 
+        
+        // Hämtar lagringshanteraren
+        const storage = getStoredData();
 
-// Hämtar lagringssystemet
-const storage = getStoredData();
+        
+        // Hanterar när användaren skickar formuläret
+        usernameForm.addEventListener('submit', event => {
+            event.preventDefault();
 
+            const value = usernameInput.value.trim().slice(0, 10);
+            usernameDisplay.textContent = value ? value : '';
+            storage.setItem('profileUsername', value);
 
-// Körs när formuläret skickas
-usernameForm.addEventListener('submit', event => {
+            const file = avatarInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    profileImg.src = reader.result;
+                    storage.setItem('profileImage', reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
 
-    // Stoppar sidan från att laddas om
-    event.preventDefault();
+            usernameInput.value = '';
+            avatarInput.value = null;
+        });
 
-    // Hämtar användarnamnet och begränsar till 10 tecken
-    const value = usernameInput.value.trim().slice(0, 10);
+        
+        // Hanterar logout-knappen
+        logoutButton.addEventListener('click', () => {
+            removeStoredData('profileUsername');
+            removeStoredData('profileImage');
 
-    // Visar användarnamnet på sidan
-    usernameDisplay.textContent = value ? value : '';
+            if (storage.setItem) {
+                storage.setItem('profileUsername', '');
+                storage.setItem('profileImage', 'images/image.png');
+            }
 
-    // Sparar användarnamnet
-    storage.setItem('profileUsername', value);
-
-    // Hämtar vald bildfil
-    const file = avatarInput.files[0];
-
-    // Om en bild har valts
-    if (file) {
-
-        // Skapar en FileReader
-        const reader = new FileReader();
-
-        // Körs när bilden har laddats
-        reader.onload = () => {
-
-            // Byter profilbild
-            profileImg.src = reader.result;
-
-            // Sparar profilbilden
-            storage.setItem('profileImage', reader.result);
-        };
-
-        // Läser bilden som data-url
-        reader.readAsDataURL(file);
-    }
-
-    // Rensar inputfälten
-    usernameInput.value = '';
-    avatarInput.value = null;
-});
-
-
-// Körs när användaren klickar på logout
-logoutButton.addEventListener('click', () => {
-
-    // Tar bort sparat användarnamn
-    removeStoredData('profileUsername');
-
-    // Tar bort sparad profilbild
-    removeStoredData('profileImage');
-
-    // Återställer sparad data
-    if (storage.setItem) {
-
-        storage.setItem('profileUsername', '');
-
-        // Sparar standardbilden istället för tomt värde
-        storage.setItem('profileImage', 'images/image.png');
-    }
-
-    // Byter tillbaka till standardbilden
-    profileImg.src = 'images/image.png';
-
-    // Tar bort användarnamnet från sidan
-    usernameDisplay.textContent = '';
-
-    // Rensar formulärfälten
-    usernameInput.value = '';
-    avatarInput.value = null;
-});
+            profileImg.src = 'images/image.png';
+            usernameDisplay.textContent = '';
+            usernameInput.value = '';
+            avatarInput.value = null;
+        });
     </script>
     <script src="profile-store.js"></script>
     <footer class="footer">

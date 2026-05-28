@@ -1,10 +1,12 @@
+/* Importerar typsnitt från Google och det lokala typsnittet Milker */
 @import url('https://fonts.googleapis.com/css2?family=Milker&display=swap');
 
 @font-face {
-font-family: Mjölk;
-src: url("../milker/Milker.otf");
+    font-family: Mjölk;
+    src: url("../milker/Milker.otf");
 }
 
+/* Grundläggande body och global layout */
 body {
     margin: 0;
     padding-top: 5.5rem;
@@ -23,6 +25,7 @@ main {
     z-index: 1;
 }
 
+/* Tabell- och informationssektioner */
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -76,7 +79,8 @@ main {
     font-size: 0.95rem;
 }
 
-.navbar{
+/* Navigationsfältet */
+.navbar {
     background-color: black;
     top: 0;
     left: 0;
@@ -250,7 +254,7 @@ h3{
     white-space: nowrap;
     font-size: 0.9em;
     font-weight: normal;
-    font-family: Arial,;
+    font-family: Arial, sans-serif;
     z-index: 2;
     transition: opacity 0.3s ease, transform 0.3s ease;
     max-width: 80vw;

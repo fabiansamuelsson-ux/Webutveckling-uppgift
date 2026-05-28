@@ -1,3 +1,4 @@
+/* Skript som laddar profilbild och användarnamn vid sidans start */
 // Funktion som hanterar lagring av data på ett säkert sätt
 function getStoredData() {
     try {

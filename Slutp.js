@@ -1,3 +1,4 @@
+/* Skript för footer-knappar som visar informationsmeddelanden */
 const footerButtons = document.querySelectorAll('.footer-btn');
 
 footerButtons.forEach(button => {
@@ -30,7 +31,7 @@ footerButtons.forEach(button => {
   });
 });
 
-// Funktionalitet för kontaktformulärets modal
+/* Funktionalitet för kontaktformulärets modal */
 const contactFormBtn = document.getElementById('contact-form-btn');
 const contactModal = document.getElementById('contact-modal');
 const closeBtn = document.querySelector('.close-btn');
@@ -46,24 +47,24 @@ closeBtn.addEventListener('click', () => {
   contactModal.classList.remove('show');
 });
 
-// Stäng modal när användaren klickar utanför rutan
+// Stäng modal när användaren klickar utanför dialogrutan
 contactModal.addEventListener('click', (event) => {
   if (event.target === contactModal) {
     contactModal.classList.remove('show');
   }
 });
 
+// Validerar att e-postadressen är en Gmail-adress
 function isValidGmailAddress(value) {
   if (!value || typeof value !== 'string') return false;
   const trimmed = value.trim().toLowerCase();
   return /^[a-z0-9._%+-]+@gmail\.com$/.test(trimmed);
 }
 
-// Hantera formulärinlämning
+// Hantera kontaktformulärets inlämning
 contactForm.addEventListener('submit', (event) => {
   event.preventDefault();
   
-  // Hämta formulärvärden
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
   const message = document.getElementById('message').value.trim();
@@ -73,7 +74,7 @@ contactForm.addEventListener('submit', (event) => {
     return;
   }
   
-  // Enkel hantering av formulärinlämning (du kan lägga till backend-integration här)
+  // Här kan du lägga till backend-integration eller annan vidare hantering
   console.log('Form submitted:', { name, email, message });
   
   // Återställ formuläret
@@ -82,6 +83,6 @@ contactForm.addEventListener('submit', (event) => {
   // Stäng modal
   contactModal.classList.remove('show');
   
-  // Valfritt: Visa ett framgångsmeddelande
+  // Valfritt: visa ett framgångsmeddelande
   alert('Thank you for contacting us! We will get back to you soon.');
 });
